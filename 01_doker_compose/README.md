@@ -32,4 +32,5 @@ docker-compose.
 ## Первый запуск
 
 - Собираем образ и запускаем контейнеры: `docker-compose up -d --build`
-- Прогоняем миграции `docker-compose exec web python manage.py migrate --noinput`
+- Прогоняем миграции: `docker-compose exec web python manage.py migrate --noinput`
+- Создаем пользователя: `docker-compose exec web  python manage.py createsuperuser`
