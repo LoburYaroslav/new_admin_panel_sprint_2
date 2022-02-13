@@ -34,3 +34,4 @@ docker-compose.
 - Собираем образ и запускаем контейнеры: `docker-compose up -d --build`
 - Миграции прогонятся сами. Статические файлы соберутся сами.
 - Создаем пользователя: `docker-compose exec web  python manage.py createsuperuser`
+- Открываем в браузере [админку](http://localhost/admin/) (http://localhost/admin/)
