@@ -4,8 +4,8 @@ services:
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000  # в проде само собой было бы иначе, но нам пока и так норм
-    ports:
-      - "8000:8000"
+    expose:
+      - 8000
     env_file:
       - ./app/.env  # обратите внимание что .env файл должен быть
     depends_on:
@@ -20,6 +20,15 @@ services:
       - ./init_db:/docker-entrypoint-initdb.d  # так решил проблему с созданием не стандартной схемы
     env_file:
       - ./app/.env.db  # обратите внимание что .env.db файл должен быть
+
+  nginx:
+    image: nginx:1.19.2
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web
+    ports:
+      - "80:80"
 
 volumes:
   postgres_data:
