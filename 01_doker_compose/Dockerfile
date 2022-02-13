@@ -19,3 +19,5 @@ RUN   \
 
 # copy project
 COPY ./app /app
+
+RUN mkdir -p "/app/staticfiles"

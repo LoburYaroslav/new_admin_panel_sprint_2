@@ -33,4 +33,5 @@ docker-compose.
 
 - Собираем образ и запускаем контейнеры: `docker-compose up -d --build`
 - Прогоняем миграции: `docker-compose exec web python manage.py migrate --noinput`
+- Собираем статические файлы: `docker-compose  exec web python manage.py collectstatic --no-input --clear`
 - Создаем пользователя: `docker-compose exec web  python manage.py createsuperuser`
