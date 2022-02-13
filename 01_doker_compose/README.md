@@ -27,11 +27,10 @@ docker-compose.
 ## Прежде всего
 
 - В папке app обязательно должны быть файлы с окружением: `.env` и `.env.db` для настройки окружения Django и Postgresql. Примеры файлов
-  приложены (_обратите внимание, что в `.env` `DB_HOST=db` так пробрасывается хост Postgresql_)
+  приложены (_обратите внимание, что в `.env` `DB_HOST=db` так пробрасывается хост Postgresql_). **Все** переменные должны быть указаны.
 
 ## Первый запуск
 
 - Собираем образ и запускаем контейнеры: `docker-compose up -d --build`
-- Прогоняем миграции: `docker-compose exec web python manage.py migrate --noinput`
-- Собираем статические файлы: `docker-compose  exec web python manage.py collectstatic --no-input --clear`
+- Миграции прогонятся сами. Статические файлы соберутся сами.
 - Создаем пользователя: `docker-compose exec web  python manage.py createsuperuser`
