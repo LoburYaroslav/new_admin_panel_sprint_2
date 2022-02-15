@@ -15,6 +15,10 @@ python3 manage.py collectstatic --no-input --clear
 echo "Apply database migrations"
 python3 manage.py migrate --noinput
 
-# Start server
-echo "Starting server"
-python3 manage.py runserver 0.0.0.0:8000
+# some initialization code
+
+if [ $# == 0 ]; then
+  python3 manage.py runserver 0.0.0.0:8000
+else
+  exec "$@"
+fi
