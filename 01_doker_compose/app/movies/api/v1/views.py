@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.list import BaseListView
+
 from movies.models import FilmWork
 
 
@@ -10,17 +11,17 @@ class MoviesApiMixin:
     model = FilmWork
     http_method_names = ['get']
 
+    @staticmethod
+    def _aggregate_person(role: str):
+        return ArrayAgg(
+            "persons__full_name", filter=Q(personfilmwork__role=role)
+        )
+
     def get_queryset(self):
         data = self.model.objects.values().annotate(
-            actors=ArrayAgg(
-                "persons__full_name", filter=Q(personfilmwork__role="actor")
-            ),
-            directors=ArrayAgg(
-                "persons__full_name", filter=Q(personfilmwork__role="director")
-            ),
-            writers=ArrayAgg(
-                "persons__full_name", filter=Q(personfilmwork__role="writer")
-            ),
+            actors=self._aggregate_person(role='actor'),
+            directors=self._aggregate_person(role='director'),
+            writers=self._aggregate_person(role='writer'),
             genres=ArrayAgg(
                 "genres__name", distinct=True
             )
