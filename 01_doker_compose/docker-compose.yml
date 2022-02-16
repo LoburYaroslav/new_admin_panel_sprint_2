@@ -32,6 +32,7 @@ services:
       - web
     ports:
       - "80:80"
+      - "8000:80"
 
 volumes:
   postgres_data:

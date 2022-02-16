@@ -21,6 +21,9 @@ class MoviesApiMixin:
             writers=ArrayAgg(
                 "persons__full_name", filter=Q(personfilmwork__role="writer")
             ),
+            genres=ArrayAgg(
+                "genres__name", distinct=True
+            )
         )
         return data
 
@@ -29,7 +32,7 @@ class MoviesApiMixin:
 
 
 class MoviesListApi(MoviesApiMixin, BaseListView):
-    paginate_by = 20
+    paginate_by = 50
 
     def get_context_data(self, *, object_list=None, **kwargs):
         paginator, page, queryset, is_paginated = self.paginate_queryset(
