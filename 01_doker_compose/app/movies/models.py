@@ -102,7 +102,7 @@ class GenreFilmWork(UUIDMixin):
         ]
 
 
-class PersonFilmWork(UUIDMixin):
+class PersonFilmWork(UUIDMixin, TimeStampedMixin):
     class PersonFilmWorkRoleChoices(models.TextChoices):
         DIRECTOR = 'director', _('director')
         WRITER = 'writer', _('writer')
@@ -117,7 +117,6 @@ class PersonFilmWork(UUIDMixin):
         default=PersonFilmWorkRoleChoices.ACTOR,
         null=True
     )
-    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'content"."person_film_work'
